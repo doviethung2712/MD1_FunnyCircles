@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Funny circles</title>
+</head>
+<body>
+<canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3;"></canvas>
+
+    <script>
+
+        class Circle {
+            x;
+            y;
+            radius;
+            width;
+            height;
+            constructor(x,y,radius,width,height) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.width = width;
+                this.height = height;
+            }
+
+            createCircle(ctx){
+                ctx.beginPath();
+                ctx.arc(this.x ,this.y,this.radius , 0 , 2*Math.PI );
+                ctx.fillStyle = "pink"
+                ctx.strokeStyle = "red"
+                ctx.stroke();
+                ctx.fill();
+            }
+
+            createCircle1(ctx){
+                 this.radius = Math.floor(Math.random()*80)
+                ctx.beginPath();
+                ctx.arc(this.x ,this.y,this.radius, 0 , 2*Math.PI );
+                ctx.fillStyle = "Blue"
+                ctx.strokeStyle = "red"
+                ctx.stroke();
+                ctx.fill();
+            }
+
+            getRandomHex(){
+                return Math.floor(Math.random()*255);
+            }
+
+            getRandomColor(){
+                let red = this.getRandomHex();
+                let green = this.getRandomHex();
+                let blue = this.getRandomHex();
+                return "rgb(" + red + "," + blue + "," + green +")";
+            }
+
+            createCircle2(ctx){
+                this.radius = Math.floor(Math.random()*80)
+                ctx.beginPath();
+                ctx.arc(this.x ,this.y,this.radius, 0 , 2*Math.PI );
+               var color = this.getRandomColor()
+                ctx.fillStyle = color;
+                ctx.strokeStyle = "red"
+                ctx.stroke();
+                ctx.fill();
+            }
+
+            createCircle3(ctx){
+                this.radius = Math.floor(Math.random()*80)
+                 this.x = Math.random() * window.innerWidth;
+                 this.y = Math.random() * window.innerHeight;
+                var color = this.getRandomColor()
+                ctx.beginPath();
+                ctx.arc(this.x ,this.y,this.radius, 0 , 2*Math.PI );
+                ctx.fillStyle = color;
+                ctx.strokeStyle = "red"
+                ctx.stroke();
+                ctx.fill();
+            }
+
+            radom(ctx){
+                for (let i=0 ; i<35;i++){
+                    this.createCircle3(ctx)
+                    this.hcn(ctx)
+                }
+            }
+
+            hcn(ctx){
+
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                var color = this.getRandomColor()
+                ctx.beginPath();
+                var grd = ctx.createLinearGradient(this.x,this.y,100,0);
+                grd.addColorStop(0,"red");
+                grd.addColorStop(1,"white");
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x,this.y,80,50);
+            }
+
+
+
+        }
+            canvas = document.getElementById('myCanvas').getContext('2d');
+        let tron = new Circle(200,200,50)
+
+            tron.createCircle(canvas)
+        let tron1 = new Circle(350,200,50)
+        tron1.createCircle1(canvas)
+
+        let tron2 = new Circle(100,100,50)
+        tron2.createCircle2(canvas)
+
+        let tron3 = new Circle(100,100,50)
+        tron3.createCircle3(canvas)
+
+               let radom = new Circle(100,100,50)
+        radom.radom(canvas)
+        let hcn = new Circle(300,200,100,200);
+        hcn.hcn(canvas)
+
+
+    </script>
+</body>
+</html>
